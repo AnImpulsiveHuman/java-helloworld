@@ -8,10 +8,10 @@ pipeline {
     
     stages {
         
-        input('Do you want to proceed to the Deployment?')
         stage('devdeploy') {
             
             steps {
+                input('Do you want to proceed to the Deployment?')
                 sh 'rm -rf java-helloworld'
                 sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
