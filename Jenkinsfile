@@ -16,7 +16,7 @@ pipeline {
                 //sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
                 sh 'git tag -a $BUILD_NUMBER -m "Build Number-$BUILD_NUMBER"'
-                sh 'git push --tags'
+                sh 'git push --tags --force'
                 dir("${env.WORKSPACE}/java-helloworld") {
                 sh 'mvn clean package'
                 sh 'java -jar target/my-app-1.0-SNAPSHOT.jar;'
