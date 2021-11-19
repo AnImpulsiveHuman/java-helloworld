@@ -12,6 +12,7 @@ pipeline {
             
             steps {
                 input('Do you want to proceed to the Deployment?')
+		sh 'rm -rf java-helloworld'
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
                 sh 'echo "$BRANCH_NAME"'
 		        sh 'git tag -a $BUILD_NUMBER -m "Build Number-$BUILD_NUMBER"'
@@ -23,7 +24,6 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: '2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'docker login --username $USERNAME --password $PASSWORD'
                 sh 'docker push "everythingtogold/gold:build-$BUILD_NUMBER"'
-		sh 'rm -rf java-helloworld'
                 }
                 }
                 }
