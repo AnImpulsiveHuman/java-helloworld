@@ -23,6 +23,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: '2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'docker login --username $USERNAME --password $PASSWORD'
                 sh 'docker push "everythingtogold/gold:build-$BUILD_NUMBER"'
+		sh 'rm -rf java-helloworld'
                 }
                 }
                 }
