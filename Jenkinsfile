@@ -19,6 +19,8 @@ pipeline {
                 sh 'mvn clean package'
                 sh 'java -jar target/my-app-1.0-SNAPSHOT.jar;'
                 sh 'docker build . -t "everythingtogold/gold:myapp"'
+                withCredentials([usernamePassword(credentialsId: '2', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh 'docker login --username $USERNAME --password $PASSWORD'
                 sh 'docker push "everythingtogold/gold:myapp"'
                 }
                 }
