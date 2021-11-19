@@ -17,7 +17,7 @@ pipeline {
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
                 sh 'echo "$BRANCH_NAME"'
 		sh 'git tag -a $BUILD_NUMBER -m "Build Number-$BUILD_NUMBER"'
-                sh 'git push "HEAD:$BRANCH_NAME" --tags'
+                sh 'git push --tags'
                 dir("${env.WORKSPACE}/java-helloworld") {
                 sh 'mvn clean package'
                 sh 'java -jar target/my-app-1.0-SNAPSHOT.jar;'
