@@ -18,9 +18,8 @@ pipeline {
                 dir("${env.WORKSPACE}/java-helloworld") {
                 sh 'mvn clean package'
                 sh 'java -jar target/my-app-1.0-SNAPSHOT.jar;'
-                }
-                dir("${env.WORKSPACE}/java-helloworld") {
-                    sh 'docker build . -t "everythingtogold/gold:build-$BUILD_NUMBER"'
+                sh 'docker build . -t "everythingtogold/gold:build-$BUILD_NUMBER"'
+                sh 'docker push "everythingtogold/gold:build-$BUILD_NUMBER"'
                 }
                 }
             }
