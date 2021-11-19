@@ -24,6 +24,7 @@ pipeline {
                 sh 'docker push "everythingtogold/gold:myapp"'
                 }
                 }
+                }
             }
         }
 }
