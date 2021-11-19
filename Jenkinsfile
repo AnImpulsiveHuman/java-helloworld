@@ -12,7 +12,7 @@ pipeline {
             
             steps {
                 sh 'rm -rf java-helloworld'
-                //sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
+                sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
                 sh 'git tag "$BUILD_NUMBER"'
                 dir("${env.WORKSPACE}/java-helloworld") {
