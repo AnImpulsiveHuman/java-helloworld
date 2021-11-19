@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    tools {
+        docker 'docker'
+    }
+    
+    parameters {
+            string(name: "BUILD_NUMBER", defaultValue: "1")
+    }
+    
+    stages {
+        
+        stage('devdeploy') {
+            
+            steps {
+                docker run --rm --name Java-HelloWorld-DEV everythingtogold/gold:build-${params.BUILD_NUMBER}
+                }
+            }
+        }
+        
+        stage('devdeploy') {
+            
+            steps {
+                docker run --rm --name Java-HelloWorld-QA everythingtogold/gold:build-${params.BUILD_NUMBER}
+                }
+            }
+        }
+        
+        stage('clean') {
+            sh 'docker images prune -a -f'
+        }
+}
