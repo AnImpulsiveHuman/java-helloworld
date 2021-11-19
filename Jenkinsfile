@@ -8,6 +8,7 @@ pipeline {
     
     stages {
         
+        input 'Do you want to proceed to the Deployment?'
         stage('devdeploy') {
             
             steps {
