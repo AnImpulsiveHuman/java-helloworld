@@ -13,10 +13,10 @@ pipeline {
             steps {
                 input('Do you want to proceed to the Deployment?')
                 sh 'rm -rf java-helloworld'
-                //sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
+                sh 'docker rmi "everythingtogold/gold:build-$BUILD_NUMBER"'
                 sh 'git clone https://github.com/vishalpranav03/java-helloworld.git;'
                 sh 'echo "$BRANCH_NAME"'
-		sh 'git tag -a $BUILD_NUMBER -m "Build Number-$BUILD_NUMBER"'
+		        sh 'git tag -a $BUILD_NUMBER -m "Build Number-$BUILD_NUMBER"'
                 sh 'git push --tags'
                 dir("${env.WORKSPACE}/java-helloworld") {
                 sh 'mvn clean package'
@@ -30,4 +30,10 @@ pipeline {
                 }
             }
         }
+	
+	post {
+	    success {
+	        build job: 'pipeline', parameters: [string(name: 'BUILD_NUMBER', value: "$BUILD_NUMBER")]
+	    }
+	}
 }
