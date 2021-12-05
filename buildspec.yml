@@ -1,0 +1,32 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  pre_build:
+    commands:
+      - echo "PreBuild"
+      # Logging in to ECR
+      #- echo Logging in to Amazon ECR...
+      #- aws --version
+      #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      #- REPOSITORY_URI=071460744267.dkr.ecr.us-east-1.amazonaws.com/test/snyk
+      # Storing the commit hash
+      #- COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      #- IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+      - echo "Build"
+      #- echo Build started on `date`
+      #- echo Building the Docker image...
+      # Building the image and scanning the dependencies with with Snyk
+      #- docker build -t $REPOSITORY_URI:latest .
+  post_build:
+    commands:
+      - echo "Post Build"
+      # Check if the build stage is successful
+      #- bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"1/" ]; then exit 1; fi"
+      #- echo Build completed on `date`
+      # Pushing the image to ECR
+      #- docker push $REPOSITORY_URI:latest
+      #- docker push $REPOSITORY_URI:$IMAGE_TAG
