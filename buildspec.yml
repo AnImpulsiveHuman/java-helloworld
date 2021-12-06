@@ -7,7 +7,7 @@ phases:
     commands:
       # Logging in to ECR
       - echo Logging in to Amazon ECR...
-      - $(aws ecr-public get-login-password --region us-east-1)
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5o7d0z2
       #- docker login --username AWS -p $(aws ecr-public get-login-password --region us-east-1) public.ecr.aws/s5o7d0z2
       - REPOSITORY_URI=public.ecr.aws/s5o7d0z2/vishal-demo-repo
       # Storing the commit hash
