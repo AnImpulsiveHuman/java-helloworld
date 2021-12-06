@@ -17,7 +17,7 @@ phases:
     commands:
       - echo Build started on `date`
       # Building using Maven
-      - echo "Running Maven"
+      - echo "Running Mvn"
       - mvn clean package
       # Building the Docker image
       - echo "Building the Docker image"
